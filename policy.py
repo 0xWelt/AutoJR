@@ -1,12 +1,10 @@
+# -*- encoding=utf8 -*-
+__author__ = "Nickydusk"
+
+
 ''' 利用control模块实现的原子控制命令，进行流程整合 '''
 
 
-class FormSelector():
-    r""" 阵容选择器，需要实现
-    
-    """
-    def __init__(self) -> None:
-        pass
 
 
 def conqure(map,fleet,repair,form_selector):
@@ -20,7 +18,7 @@ def conqure(map,fleet,repair,form_selector):
     '''
     pass
 
-# 
+
 def exercise(): # TODO：演习
     pass
 
