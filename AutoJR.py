@@ -4,7 +4,6 @@ __author__ = "Nickydusk"
 from airtest.core.api import auto_setup,sleep
 from template import *
 from control import *
-from policy import *
 from strategy import *
 
 import logging
@@ -20,8 +19,11 @@ GC = GameController("config.json")
 
 # 主循环，简易控制
 while True:
+    print(time.ctime())
     GC.check_and_expedition()
     GC.check_missions()
+    GC.check_mail()
     
-    sleep(10)
+    sleep(575)
+
 

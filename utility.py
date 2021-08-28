@@ -7,6 +7,7 @@ import time
 from airtest.core.api import logwrap, loop_find, TargetNotFoundError,Template
 from airtest.core.cv import try_log_screen
 from airtest.core.helper import G
+from CONSTS import *
 
 
 @logwrap
@@ -36,5 +37,5 @@ def touch(v, times=1, timeout=5, threshold=0.7, interval=0, **kwargs):
         G.DEVICE.touch(pos, **kwargs)
         time.sleep(0.05)
 
-    time.sleep(0.5)     # 控制点击之后休息多久
+    time.sleep(0.75)     # 控制点击之后休息多久
     return pos

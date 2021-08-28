@@ -18,13 +18,22 @@ def init_template():
                 "用户名":Template(r"pictures/ui/登录/用户名.png", record_pos=(-0.196, -0.079), resolution=(1280, 720)),
             },
             "主页":{
+                "杂项":Template(r"pictures/ui/主页/杂项.png", record_pos=(-0.449, 0.222), resolution=(1280, 720)),
+                "建造开发完成":Template(r"pictures/ui/主页/建造开发完成.png", record_pos=(-0.364, 0.24), resolution=(1280, 720)),
+                "新邮件":Template(r"pictures/ui/主页/新邮件.png", record_pos=(-0.285, 0.243), resolution=(1280, 720)),
+                "邮件_全部收取":Template(r"pictures/ui/主页/邮件_全部收取.png", record_pos=(0.401, 0.245), resolution=(1280, 720)),
+                "邮件_返回":Template(r"pictures/ui/主页/邮件_返回.png", record_pos=(-0.467, -0.248), resolution=(1280, 720)),
+
                 "出征":Template(r"pictures/ui/主页/出征.png", record_pos=(0.463, 0.247), resolution=(1280, 720)),
                 "出征_红点":Template(r"pictures/ui/主页/出征_红点.png", record_pos=(0.462, 0.205), resolution=(1280, 720)),
                 "船坞":Template(r"pictures/ui/主页/船坞.png", record_pos=(0.321, 0.249), resolution=(1280, 720)),
                 "任务":Template(r"pictures/ui/主页/任务.png", record_pos=(0.206, 0.248), resolution=(1280, 720)),
                 "任务_红点":Template(r"pictures/ui/主页/任务_红点.png", record_pos=(0.197, 0.21), resolution=(1280, 720)),
-                "杂项":Template(r"pictures/ui/主页/杂项.png", record_pos=(-0.449, 0.222), resolution=(1280, 720)),
-                "建造开发完成":Template(r"/pictures/ui/主页/建造开发完成.png", record_pos=(-0.364, 0.24), resolution=(1280, 720)),
+                
+                "活动通知_今日不再显示":Template(r"pictures/ui/主页/活动通知_今日不再显示.png", record_pos=(-0.434, 0.233), resolution=(1280, 720)),
+                "活动通知_返回":Template(r"pictures/ui/主页/活动通知_返回.png", record_pos=(-0.468, -0.248), resolution=(1280, 720)),
+                "每日奖励_领取":Template(r"pictures/ui/主页/每日奖励_领取.png", record_pos=(0.0, 0.097), resolution=(1280, 720)),
+                "每日奖励_确认":Template(r"pictures/ui/主页/每日奖励_确认.png", record_pos=(-0.001, 0.038), resolution=(1280, 720))
             },
             "杂项":{
                 "建造":{
