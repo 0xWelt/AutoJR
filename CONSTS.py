@@ -1,3 +1,10 @@
+import json
+
+# 从配置文件加载用户自定义的常量
+with open('config.json') as f:
+    CFG = json.load(f)
+
+
 GAME_STATE = {"设备主页",
               "登录",
               "主页","杂项","活动通知","每日奖励"
@@ -7,4 +14,4 @@ GAME_STATE = {"设备主页",
               "未知"
               }
 
-TASK_STATE = {"等待执行","执行中","成功结束","异常结束"}
+TASK_STATE = {"等待执行","执行中","正常结束","异常结束","等待销毁"}

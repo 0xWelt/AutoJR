@@ -22,7 +22,7 @@ def exists(v, timeout=1, threshold=0.7, interval=0):
         return pos
 
 @logwrap
-def touch(v, times=1, timeout=5, threshold=0.7, interval=0, **kwargs):
+def touch(v, times=1, timeout=5, threshold=0.7, interval=0, delay=0.75, **kwargs):
     r""" 加入: 找不到返回False、自定义超时 """
 
     if isinstance(v, Template):
@@ -37,5 +37,5 @@ def touch(v, times=1, timeout=5, threshold=0.7, interval=0, **kwargs):
         G.DEVICE.touch(pos, **kwargs)
         time.sleep(0.05)
 
-    time.sleep(0.75)     # 控制点击之后休息多久
+    time.sleep(delay)     # 控制点击之后休息多久
     return pos
