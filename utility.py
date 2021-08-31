@@ -39,3 +39,4 @@ def touch(v, times=1, timeout=5, threshold=0.7, interval=0, delay=0.75, **kwargs
 
     time.sleep(delay)     # 控制点击之后休息多久
     return pos
+

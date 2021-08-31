@@ -26,9 +26,9 @@ class Strategy():
     
     def print_tasks(self):
         print()
-        print("===== 现在时间:",dt.datetime.now(),"=====")
+        print("======= 现在时间:",dt.datetime.now(),"=======")
         for task in self.task_list:
-            print(task.name,task.status,task.priority,task.wake_time)
+            print("%d %s"%(task.priority,task.name.center(12,u'　')),task.wake_time)
         print()
 
     def main_loop(self):
@@ -62,17 +62,17 @@ class tmpStrategy(Strategy):
         super().__init__()
 
     def init_tasks(self):
-        # 每天三点重启游戏，刷新每日任务
+        # 维护容错任务（优先级0）
+        self.add_task(AutoRestartSimulator,0,dt.datetime.now()+dt.timedelta(hours=6)) # 每隔数小时重启模拟器，防止模拟器卡死
         tm = dt.datetime.now() + dt.timedelta(days=1)
-        self.add_task(AutoRestartGame,0,dt.datetime(tm.year,tm.month,tm.day,3))
+        self.add_task(AutoRestartGame,0,dt.datetime(tm.year,tm.month,tm.day,3)) # 每天三点重启游戏，刷新每日任务
+        
 
-        # 每隔数小时重启模拟器，防止模拟器卡死
-        self.add_task(AutoRestartSimulator,0,dt.datetime.now()+dt.timedelta(hours=6))
+        # 被动型任务，检查是否完成并相关处理（优先级1）
+        self.add_task(AutoMissionExpedition,1,dt.datetime.now())
+        self.add_task(CheckMail,1,dt.datetime.now())
+        self.add_task(CheckDev,1,dt.datetime.now())
 
-        # 被动型任务，检查是否完成并相关处理
-        self.add_task(RepeatExpedition,0,dt.datetime.now())
-        self.add_task(CheckMission,0,dt.datetime.now())
-        self.add_task(CheckMail,0,dt.datetime.now())
 
         # 主动型任务
 

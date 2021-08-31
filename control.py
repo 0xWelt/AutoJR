@@ -1,7 +1,7 @@
 # -*- encoding=utf8 -*-
 __author__ = "Nickydusk"
 
-from airtest.core.api import start_app,stop_app,text,keyevent,sleep,auto_setup
+from airtest.core.api import start_app,stop_app,text,keyevent,auto_setup
 from utility import exists, touch
 from template import *
 from CONSTS import *
@@ -16,7 +16,7 @@ class GameController():
             config_json_path: 存放用户配置文件的目录
 
         """
-        auto_setup(__file__,devices=['android://'])
+        auto_setup(__file__,devices=['android://?cap_method=JAVACAP&&ori_method=MINICAPORI&&touch_method=MINITOUCH"'])
 
 
         # 进行模组初始化
@@ -46,8 +46,7 @@ class GameController():
         r''' 登录游戏，如果发现账号未登录则先登录，账号密码放在config.json中 '''
         # 启动游戏
         start_app(r"com.huanmeng.zhanjian2")
-        auto_setup(__file__,devices=['android://']) # FIXME:发现开启APP后再次setup，可以把横屏转换成竖屏，进而解决所有问题。后续需要解决如何横屏的问题
-        
+                
         self.state = "登录"
         if first_time or False==touch(UI['登录']["进入游戏"],timeout=20):
             while True:
@@ -85,7 +84,7 @@ class GameController():
                     continue
                 # case 5: 未能成功启动游戏
                 start_app(r"com.huanmeng.zhanjian2")
-                auto_setup(__file__,devices=['android://'])
+
 
         if exists(UI['主页']['杂项'],threshold=0.85,timeout=10):
             if touch(UI['主页']['每日奖励_领取'],timeout=0.5):
