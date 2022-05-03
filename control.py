@@ -46,36 +46,27 @@ class GameController():
         r''' 登录游戏，如果发现账号未登录则先登录，账号密码放在config.json中 '''
         # 启动游戏
         start_app(r"com.huanmeng.zhanjian2")
-                
+
         self.state = "登录"
-        if first_time or False==touch(UI['登录']["进入游戏"],timeout=20):
+        if first_time or touch(UI['登录']["进入游戏"], timeout=20) == False:
             while True:
                 print('未发现“进入游戏”按钮，尝试可能情况中...')
-                loc = exists(UI['登录']["进入游戏"])
-                if loc:
+                if loc := exists(UI['登录']["进入游戏"]):
                     touch(loc)
                     break
-                # case 1: 需要下载
-                loc = exists(UI['登录']['确认'])
-                if loc:
+                if loc := exists(UI['登录']['确认']):
                     print('检测到：下载资源！')
                     touch(loc)
                     continue
-                # case 2: 需要确认模拟器权限
-                loc = exists(UI['雷电模拟器']['允许'])
-                if loc:
+                if loc := exists(UI['雷电模拟器']['允许']):
                     print('检测到：模拟器权限允许！')
                     touch(loc)
                     continue
-                # case 3: 需要确认游戏条款
-                loc = exists(UI['登录']['接受'])
-                if loc:
+                if loc := exists(UI['登录']['接受']):
                     print('检测到：接受条款！')
                     touch(loc)
                     continue
-                # case 4: 需要登录
-                loc = exists(UI['登录']['用户名'])
-                if loc:
+                if loc := exists(UI['登录']['用户名']):
                     print('检测到：账号登陆！')
                     touch(loc)
                     text(CFG['username'])
@@ -95,20 +86,18 @@ class GameController():
             print("[ERROR] 登陆失败！")
             self.SL()
 
-    def SL(self,big=True): 
+    def SL(self,big=True):
         r""" 进行SL,大的杀掉游戏进程,小的点击撤退 """
         if big:
             stop_app(r"com.huanmeng.zhanjian2")
             self.state = "设备主页"
             self.login()
-        else: # TODO: 点击游戏内的撤退
-            pass
 
-    def back_to_home(self): # TODO:更多情况
+    def back_to_home(self):    # TODO:更多情况
         r""" 回到游戏主界面 """
         
-        print("%s -> 主页"%self.state)
-        
+        print(f"{self.state} -> 主页")
+
         if self.state == "主页":
             if touch(UI['主页']['每日奖励_领取'],timeout=0.5):
                 touch(UI['主页']['每日奖励_确认'],timeout=0.5)

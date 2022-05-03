@@ -77,8 +77,7 @@ class AutoMissionExpedition(Task):
         self.GC.reset_state()
         self.GC.back_to_home()
 
-        loc = exists(UI['主页']['红点'])
-        if loc:
+        if loc := exists(UI['主页']['红点']):
             touch(loc)
             self.did_something=True
             while touch(UI['任务']['领取奖励'],timeout=1,threshold=0.9):
@@ -88,7 +87,7 @@ class AutoMissionExpedition(Task):
                 print("发现远征！")
                 touch(UI['空'])      # 空白位置随便点一下，确认奖励
                 touch(UI['出征']['远征']['确认'])
-            
+
             touch(UI['返回'])
             self.status = "正常结束"
         else:
@@ -113,9 +112,8 @@ class CheckMail(Task):
     def do(self):
         self.GC.reset_state()
         self.GC.back_to_home()
-        
-        loc = exists(UI['主页']['新邮件'],threshold=0.85)    # FIXME：定阈值没用了，得改图片
-        if loc:
+
+        if loc := exists(UI['主页']['新邮件'], threshold=0.85):
             print("发现新邮件!")
             touch(loc)
             touch(UI['主页']['邮件_全部收取'])
@@ -143,9 +141,8 @@ class CheckDev(Task):
     def do(self):
         self.GC.reset_state()
         self.GC.back_to_home()
-        
-        loc = exists(UI['主页']['建造开发完成'])
-        if loc:
+
+        if loc := exists(UI['主页']['建造开发完成']):
             print("发现新建造开发!")
             touch(loc)
             touch(UI['杂项']['建造']['建造_开发']['完成'])
