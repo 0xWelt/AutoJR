@@ -1,13 +1,16 @@
 # -*- encoding=utf8 -*-
 __author__ = "Nickydusk"
 
-""" 由于airtest部分API过于僵硬，需要手动从更底层实现一些新的封装 """
-
 import time
-from airtest.core.api import logwrap, loop_find, TargetNotFoundError,Template
+
+from airtest.core.api import TargetNotFoundError, Template, logwrap, loop_find
 from airtest.core.cv import try_log_screen
 from airtest.core.helper import G
+
 from CONSTS import *
+
+
+''' 由于airtest部分API过于僵硬, 需要手动从更底层实现一些新的封装 '''
 
 
 @logwrap
@@ -20,6 +23,7 @@ def exists(v, timeout=1, threshold=0.7, interval=0):
         return False
     else:
         return pos
+
 
 @logwrap
 def touch(v, times=1, timeout=5, threshold=0.7, interval=0, delay=0.75, **kwargs):
@@ -39,4 +43,3 @@ def touch(v, times=1, timeout=5, threshold=0.7, interval=0, delay=0.75, **kwargs
 
     time.sleep(delay)     # 控制点击之后休息多久
     return pos
-

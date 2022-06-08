@@ -1,7 +1,7 @@
 # -*- encoding=utf8 -*-
 __author__ = "Nickydusk"
 
-from airtest.core.api import start_app,stop_app,text,keyevent,auto_setup
+from airtest.core.api import start_app, stop_app, text, keyevent, auto_setup
 from utility import exists, touch
 from template import *
 from CONSTS import *
@@ -9,31 +9,30 @@ from CONSTS import *
 
 class GameController():
     r""" 游戏控制器类，实现所有所需的 原子、组合 控制方法。 """
-    
+
     def __init__(self) -> None:
         r"""
         Args:
             config_json_path: 存放用户配置文件的目录
 
         """
-        auto_setup(__file__,devices=['android://?cap_method=JAVACAP&&ori_method=MINICAPORI&&touch_method=MINITOUCH"'])
-
+        auto_setup(__file__, devices=['android://?cap_method=JAVACAP&&ori_method=MINICAPORI&&touch_method=MINITOUCH"'])
 
         # 进行模组初始化
         self.fs = FormSelector(default="SL")
-        
+
         # 加载游戏状态，并复位到游戏主页
         self.reset_state()
         self.back_to_home()
 
         print("GC 初始化成功！应当位于主界面")
 
-    def reset_state(self): # TODO:更多情况
+    def reset_state(self):  # TODO:更多情况
         r""" 检测当前所处状态并设置self.state  注意！！非常耗时！！ """
-        
-        if exists(UI['主页']['杂项'],threshold=0.85):
+
+        if exists(UI['主页']['杂项'], threshold=0.85):
             self.state = "主页"
-        elif exists(UI['返回'],threshold=0.95):
+        elif exists(UI['返回'], threshold=0.95):
             self.state = "可返回"
         elif exists(UI['登录']["进入游戏"]):
             self.state = "登录"
@@ -42,7 +41,7 @@ class GameController():
         else:
             self.state = "未知"
 
-    def login(self,first_time=False):
+    def login(self, first_time=False):
         r''' 登录游戏，如果发现账号未登录则先登录，账号密码放在config.json中 '''
         # 启动游戏
         start_app(r"com.huanmeng.zhanjian2")
@@ -76,17 +75,16 @@ class GameController():
                 # case 5: 未能成功启动游戏
                 start_app(r"com.huanmeng.zhanjian2")
 
-
-        if exists(UI['主页']['杂项'],threshold=0.85,timeout=10):
-            if touch(UI['主页']['每日奖励_领取'],timeout=0.5):
-                touch(UI['主页']['每日奖励_确认'],timeout=0.5)
+        if exists(UI['主页']['杂项'], threshold=0.85, timeout=10):
+            if touch(UI['主页']['每日奖励_领取'], timeout=0.5):
+                touch(UI['主页']['每日奖励_确认'], timeout=0.5)
             self.state = "主页"
             print('进入游戏成功！')
         else:
             print("[ERROR] 登陆失败！")
             self.SL()
 
-    def SL(self,big=True):
+    def SL(self, big=True):
         r""" 进行SL,大的杀掉游戏进程,小的点击撤退 """
         if big:
             stop_app(r"com.huanmeng.zhanjian2")
@@ -95,12 +93,12 @@ class GameController():
 
     def back_to_home(self):    # TODO:更多情况
         r""" 回到游戏主界面 """
-        
+
         print(f"{self.state} -> 主页")
 
         if self.state == "主页":
-            if touch(UI['主页']['每日奖励_领取'],timeout=0.5):
-                touch(UI['主页']['每日奖励_确认'],timeout=0.5)
+            if touch(UI['主页']['每日奖励_领取'], timeout=0.5):
+                touch(UI['主页']['每日奖励_确认'], timeout=0.5)
         elif self.state == "可返回":
             touch(UI['返回'])
             self.state = "主页"
@@ -116,12 +114,10 @@ class GameController():
         else:
             self.SL()
 
-
-    def select_form(self): # TODO:更多分支
+    def select_form(self):  # TODO:更多分支
         form = self.fs.select()
-        if form=='SL':
+        if form == 'SL':
             self.SL()
-        
 
     # def conqure(self, map, fleet, repair):
     #     r'''TODO：一次完整常规出征流程，包含 [选图(check)，换阵(check)，按需快修，按照策略进行数场战斗]
@@ -137,12 +133,13 @@ class GameController():
 
 class FormSelector():
     r""" 阵容选择器，需要实现 """
+
     def __init__(self, default, strategy=None) -> None:
         r"""
         Args:
             default: 规则不存在或匹配失败时采用的阵形，必须指定
             strategy: {"A":{"enemy":form,...}}，第一级字典表示图中的节点（字母），第二维是个字典，按照敌人的类型匹配阵形
-            
+
         """
         self.default = default
         self.strategy = strategy
@@ -162,4 +159,3 @@ class FormSelector():
             return self.strategy[self.node]
         else:
             return self.default
-
