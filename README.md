@@ -1,7 +1,7 @@
 # AutoJR
 基于airtest.netease框架的《战舰少女R》自动化脚本，旨在实现"完全自动化“和”与人类玩家不可区分“两大目标。
 
-该项目已迁移至，当前位置暂不更新：https://github.com/huan-yp/Auto-WSGR
+该项目已迁移至https://github.com/huan-yp/Auto-WSGR，当前位置停止更新。
 
 *(更新于2022/08/12)*
 
